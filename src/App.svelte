@@ -4,6 +4,8 @@
   import Header from './components/Header.svelte';
   import Footer from './components/Footer.svelte';
 
+  import PosterListCard from './components/PosterListCard.svelte';
+
   const movies = new Movie();
   let isLoading = true;
   let popular;
@@ -30,8 +32,6 @@
 
 <Header />
 <main>
-  <section>
-    <h1>Popular Movies</h1>
     {#if isLoading}
       <p>Loading...</p>
     {/if}
@@ -39,8 +39,7 @@
       <p>{errorMessage}</p>
     {/if}
     {#if !isLoading && popular}
-      <pre>{JSON.stringify(popular, null, 4)}</pre>
+      <PosterListCard titleCollection="Popular Movies" data={popular} />
     {/if}
-  </section>
 </main>
 <Footer />

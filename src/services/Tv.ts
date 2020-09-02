@@ -5,11 +5,15 @@ import type { ParamsUrl } from '../models/api';
 
 export class Tv {
   discover({ sortBy = 'popularity.desc', page = 1 }: ParamsUrl) {
-    return instance.get<TvResults>(`/discover/tv?${paramsDefault}&page=${page}&sort_by=${sortBy}&timezone=America%2FNew_York&include_null_first_air_dates=false`);
+    return instance.get<TvResults>(
+      `/discover/tv?${paramsDefault}&page=${page}&sort_by=${sortBy}&timezone=America%2FNew_York&include_null_first_air_dates=false`
+    );
   }
 
   search({ query, page = 1 }: ParamsUrl) {
-    return instance.get<TvResults>(`/search/tv?${paramsDefault}&page=${page}&query=${query}&include_adult=false`);
+    return instance.get<TvResults>(
+      `/search/tv?${paramsDefault}&page=${page}&query=${query}&include_adult=false`
+    );
   }
 
   details({ mediaId }: ParamsUrl) {

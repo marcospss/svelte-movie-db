@@ -5,11 +5,15 @@ import type { ParamsUrl } from '../models/api';
 
 export class Movie {
   discover({ sortBy = 'popularity.desc', page = 1 }) {
-    return instance.get<MovieResults>(`/discover/movie?${paramsDefault}&page=${page}&sort_by=${sortBy}&include_adult=false&include_video=false`);
+    return instance.get<MovieResults>(
+      `/discover/movie?${paramsDefault}&page=${page}&sort_by=${sortBy}&include_adult=false&include_video=false`
+    );
   }
 
   search({ query, page = 1 }: ParamsUrl) {
-    return instance.get<MovieResults>(`/search/movie?${paramsDefault}&page=${page}&query=${query}&include_adult=false`);
+    return instance.get<MovieResults>(
+      `/search/movie?${paramsDefault}&page=${page}&query=${query}&include_adult=false`
+    );
   }
 
   details({ mediaId }: ParamsUrl) {
@@ -17,7 +21,9 @@ export class Movie {
   }
 
   recommendations({ mediaId, page = 1 }: ParamsUrl) {
-    return instance.get<MovieResults>(`/movie/${mediaId}/recommendations?${paramsDefault}&page=${page}`);
+    return instance.get<MovieResults>(
+      `/movie/${mediaId}/recommendations?${paramsDefault}&page=${page}`
+    );
   }
 
   similar({ mediaId, page = 1 }: ParamsUrl) {

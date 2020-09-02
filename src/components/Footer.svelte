@@ -1,5 +1,5 @@
-<footer>
-	footer
-</footer>
+<style>
 
-<style></style>
+</style>
+
+<footer>footer</footer>

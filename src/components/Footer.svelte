@@ -9,6 +9,7 @@
     padding: 2rem 0 1rem;
     background-color: var(--color-blue-black);
     color: var(--color-white);
+    box-shadow: 0 -2px 10px -3px rgb(118 118 118 / 39%), 0px 0px 20px -2px rgb(11 34 57 / 53%);
   }
   footer h2 {
     margin: 0px;
@@ -18,6 +19,7 @@
   footer p {
     margin: 10px;
     font-size: 1rem;
+    text-align: center;
   }
 
   footer a {

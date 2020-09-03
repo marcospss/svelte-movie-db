@@ -2,9 +2,6 @@
   section {
     padding: 14px;
   }
-  section h2 {
-    font-size: 2rem;
-  }
   section .grid-list {
     display: grid;
     grid-template-columns: 1fr;
@@ -41,7 +38,6 @@
 </script>
 
 <section>
-  <h2>{titleCollection}</h2>
   <div class="grid-list">
     {#each data.results as item (item.id)}
       <CardBackdrop {item} />

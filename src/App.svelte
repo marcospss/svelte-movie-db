@@ -12,7 +12,7 @@
   import Header from './components/Header.svelte';
   import Footer from './components/Footer.svelte';
   import Loading from './components/ui/Loading.svelte';
-
+  import Tabs from './components/ui/Tabs.svelte';
   import PosterListCard from './components/PosterListCard.svelte';
 
   const movies = new Movie();
@@ -34,6 +34,15 @@
     }
   };
 
+  // tabs
+  let items = ['Popular Movies', 'Now Playing Movies', 'Upcoming Movies', 'Top Rated Movies'];
+  let activeItem = 'Popular Movies';
+  const tabChange = (e) => activeItem = e.detail;
+
+  const handleAdd = () => {
+    activeItem = 'Popular Movies';
+  }
+
   onMount(async () => {
     await popularMovies();
   });
@@ -41,14 +50,15 @@
 
 <Header />
 <main>
+    <Tabs {activeItem} {items} on:tabChange={tabChange} />
+    {#if !isLoading && activeItem === 'Popular Movies'}
+      <PosterListCard data={popular} />
+    {/if}
     {#if isLoading}
       <Loading />
     {/if}
     {#if errorMessage}
       <p>{errorMessage}</p>
-    {/if}
-    {#if !isLoading && popular}
-      <PosterListCard titleCollection="Popular Movies" data={popular} />
     {/if}
 </main>
 <Footer />

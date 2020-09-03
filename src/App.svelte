@@ -11,6 +11,7 @@
   import { Movie } from './services/Movies';
   import Header from './components/Header.svelte';
   import Footer from './components/Footer.svelte';
+  import Loading from './components/ui/Loading.svelte';
 
   import PosterListCard from './components/PosterListCard.svelte';
 
@@ -26,10 +27,10 @@
     try {
       const popularResponse = await movies.popular({ page: 1 });
       popular = popularResponse.data;
-      // isLoading = false;
+      isLoading = false;
     } catch (error) {
       errorMessage = error;
-      // isLoading = false;
+      isLoading = false;
     }
   };
 
@@ -41,7 +42,7 @@
 <Header />
 <main>
     {#if isLoading}
-      <p>Loading...</p>
+      <Loading />
     {/if}
     {#if errorMessage}
       <p>{errorMessage}</p>

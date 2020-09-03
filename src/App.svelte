@@ -1,3 +1,11 @@
+<style>
+  main {
+    position: relative;
+    padding-top: 4rem;
+    min-height: calc(100vh - 184px);
+    height: auto;
+  }
+</style>
 <script lang="ts">
   import { onMount } from 'svelte';
   import { Movie } from './services/Movies';
@@ -18,15 +26,15 @@
     try {
       const popularResponse = await movies.popular({ page: 1 });
       popular = popularResponse.data;
-      isLoading = false;
+      // isLoading = false;
     } catch (error) {
       errorMessage = error;
-      isLoading = false;
+      // isLoading = false;
     }
   };
 
-  onMount(() => {
-    popularMovies();
+  onMount(async () => {
+    await popularMovies();
   });
 </script>
 

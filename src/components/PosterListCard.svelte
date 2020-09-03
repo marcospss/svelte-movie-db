@@ -18,7 +18,7 @@
     }
   }
 
-  @media screen and (min-width: 802px) and (max-width: 1024px) {
+  @media screen and (min-width: 801px) and (max-width: 1024px) {
     section .grid-list {
       grid-template-columns: repeat(3, 1fr);
       column-gap: 1rem;

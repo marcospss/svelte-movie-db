@@ -3,11 +3,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
     background-color: var(--color-primary);
     color: var(--color-secondary);
-    padding: 10px 20px;
-    box-shadow: 0px 1px 3px 0px rgba(255, 255, 255, 1);
-    position: sticky;
+    padding: 1.2rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    z-index: 9;
   }
   header .logo {
     display: flex;

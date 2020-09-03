@@ -4,8 +4,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
+    background-color: #010101;
+    color: var(--color-white);
     padding: 1.2rem;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     position: fixed;
@@ -15,7 +15,6 @@
     display: flex;
     flex-flow: column;
     width: 360px;
-    color: var(--color-secondary);
   }
 
   header .logo .title {
@@ -24,7 +23,8 @@
     font-weight: bold;
   }
   header .logo .sub-title {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 500;
   }
 </style>
 

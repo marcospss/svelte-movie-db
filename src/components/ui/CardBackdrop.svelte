@@ -27,10 +27,10 @@
   .card-backdrop-item .header h1 {
     width: 100%;
     position: absolute;
-    bottom: 4px;
+    bottom: 3px;
     left: 0;
     margin: 0;
-    background-color: #fff6;
+    background-color: #ffffff96;
     padding: 0.5rem;
     font-size: 1.5rem;
     color: var(--color-secondary);

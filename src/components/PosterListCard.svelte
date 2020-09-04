@@ -33,7 +33,6 @@
 <script lang="ts">
   import type { MovieResults } from '../models/movie';
   import CardBackdrop from './ui/CardBackdrop.svelte';
-  export let titleCollection;
   export let data: MovieResults;
 </script>
 

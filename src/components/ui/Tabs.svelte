@@ -31,15 +31,15 @@
   import { createEventDispatcher } from 'svelte';
   let dispatch = createEventDispatcher();
 
-  export let items;
+  export let pages;
   export let activeItem;
 </script>
 
 <div class="tabs">
   <ul>
-    {#each items as item}
-      <li on:click={() => dispatch('tabChange', item)}>
-        <div class:active={item === activeItem}>{item}</div>
+    {#each pages as page}
+      <li on:click={() => dispatch('tabChange', page)}>
+        <div class:active={page.slug === activeItem}>{page.title}</div>
       </li>
     {/each}
   </ul>

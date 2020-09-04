@@ -17,16 +17,17 @@
 
   const movies = new Movie();
   let isLoading = true;
-  let popular;
+  let data = null;
   let errorMessage = '';
   // https://swr.vercel.app/
   /**
    * POPULAR
    */
-  const popularMovies = async () => {
+  const dataMovies = async (service = 'nowPlaying') => {
     try {
-      const popularResponse = await movies.popular({ page: 1 });
-      popular = popularResponse.data;
+      const response = await movies[service]({ page: 1 });
+      data = response.data;
+      console.log('dataMovies', data);
       isLoading = false;
     } catch (error) {
       errorMessage = error;
@@ -35,24 +36,41 @@
   };
 
   // tabs
-  let items = ['Popular Movies', 'Now Playing Movies', 'Upcoming Movies', 'Top Rated Movies'];
-  let activeItem = 'Popular Movies';
-  const tabChange = (e) => activeItem = e.detail;
-
-  const handleAdd = () => {
-    activeItem = 'Popular Movies';
-  }
+  let pages = [
+    {
+    title: 'Now Playing Movies',
+    slug: 'nowPlaying'
+    },
+    {
+    title: 'Popular Movies',
+    slug: 'popular'
+    },
+    {
+    title: 'Top Rated Movies',
+    slug: 'topRated'
+    },
+    {
+    title: 'Upcoming Movies',
+    slug: 'upcoming'
+    },
+  ];
+  let activeItem = 'nowPlaying';
+  const tabChange = async (e) => {
+    const { slug } = e.detail;
+    activeItem = slug;
+    await dataMovies(slug);
+  };
 
   onMount(async () => {
-    await popularMovies();
+    await dataMovies();
   });
 </script>
 
 <Header />
 <main>
-    <Tabs {activeItem} {items} on:tabChange={tabChange} />
-    {#if !isLoading && activeItem === 'Popular Movies'}
-      <PosterListCard data={popular} />
+    <Tabs {activeItem} {pages} on:tabChange={tabChange} />
+    {#if !isLoading && data && activeItem === 'nowPlaying'}
+      <PosterListCard {data} />
     {/if}
     {#if isLoading}
       <Loading />

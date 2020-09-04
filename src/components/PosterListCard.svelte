@@ -31,6 +31,9 @@
 </style>
 
 <script lang="ts">
+  import { fade, slide, scale } from 'svelte/transition';
+  import { flip } from 'svelte/animate';
+  
   import MovieStore from '../store/movieStore';
   import CardBackdrop from './ui/CardBackdrop.svelte';
 </script>
@@ -38,7 +41,9 @@
 <section>
   <div class="grid-list">
     {#each $MovieStore as item (item.id)}
+    <div in:fade out:scale|local animate:flip={{duration: 500}}>
       <CardBackdrop {item} />
+    </div>
     {/each}
   </div>
 </section>

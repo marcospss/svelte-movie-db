@@ -8,6 +8,8 @@
 </style>
 <script lang="ts">
   import { onMount } from 'svelte';
+
+  import MovieStore from './store/movieStore';
   import { Movie } from './services/Movies';
   import Header from './components/Header.svelte';
   import Footer from './components/Footer.svelte';
@@ -26,12 +28,12 @@
   const dataMovies = async (service = 'nowPlaying') => {
     try {
       const response = await movies[service]({ page: 1 });
-      data = response.data;
-      console.log('dataMovies', data);
+      data = response.data.results;
+      MovieStore.update(() => [...data]);
       isLoading = false;
     } catch (error) {
-      errorMessage = error;
       isLoading = false;
+      errorMessage = error;
     }
   };
 
@@ -67,15 +69,15 @@
 </script>
 
 <Header />
-<main>
+<main class="main-content">
     <Tabs {activeItem} {pages} on:tabChange={tabChange} />
-    {#if !isLoading && data && activeItem === 'nowPlaying'}
-      <PosterListCard {data} />
+    {#if !isLoading && !errorMessage}
+      <PosterListCard />
     {/if}
     {#if isLoading}
       <Loading />
     {/if}
-    {#if errorMessage}
+    {#if !isLoading && errorMessage}
       <p>{errorMessage}</p>
     {/if}
 </main>

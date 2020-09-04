@@ -31,14 +31,13 @@
 </style>
 
 <script lang="ts">
-  import type { MovieResults } from '../models/movie';
+  import MovieStore from '../store/movieStore';
   import CardBackdrop from './ui/CardBackdrop.svelte';
-  export let data: MovieResults;
 </script>
 
 <section>
   <div class="grid-list">
-    {#each data.results as item (item.id)}
+    {#each $MovieStore as item (item.id)}
       <CardBackdrop {item} />
     {/each}
   </div>

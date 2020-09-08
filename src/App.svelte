@@ -18,15 +18,17 @@
   import PosterListCard from './components/PosterListCard.svelte';
 
   const movies = new Movie();
-  let isLoading = true;
+  $: isLoading = true;
   let data = null;
   let errorMessage = '';
+  
   // https://swr.vercel.app/
   /**
    * POPULAR
    */
   const dataMovies = async (service = 'nowPlaying') => {
     try {
+      isLoading = true;
       const response = await movies[service]({ page: 1 });
       data = response.data.results;
       MovieStore.update(() => [...data]);

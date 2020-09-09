@@ -1,15 +1,14 @@
 <style>
   header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     background-color: #010101;
     color: var(--color-white);
     padding: 1.2rem;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    position: fixed;
-    z-index: 9;
+    z-index: 1;
   }
   header .logo {
     display: flex;

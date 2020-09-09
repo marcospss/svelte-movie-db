@@ -1,14 +1,7 @@
-<script lang="ts">
-  import type { MovieItem } from '../../models/movie';
-  import image from '../../settings/image';
-  export let item: MovieItem;
-  const processedOverview = (overview) => overview.length > 110 ? `${overview.substring(0, 100)}...` : overview;
-</script>
-
 <style>
   .card-backdrop-item {
     background: var(--color-white);
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
   }
@@ -35,7 +28,7 @@
     font-size: 1.5rem;
     color: var(--color-secondary);
     font-weight: normal;
-    box-shadow: 0px 0px 4px 2px rgba(158,158,158,0.5);
+    box-shadow: 0px 0px 4px 2px rgba(158, 158, 158, 0.5);
     overflow: hidden;
   }
   .card-backdrop-item .overview {
@@ -44,12 +37,23 @@
   }
 </style>
 
+<script lang="ts">
+  import type { MovieItem } from '../../models/movie';
+  import image from '../../settings/image';
+  export let item: MovieItem;
+  const processedOverview = (overview) =>
+    overview.length > 110 ? `${overview.substring(0, 100)}...` : overview;
+</script>
+
 <article class="card-backdrop-item">
   <div class="header">
     <figure>
-      <img src={`${image.secure_base_url}${image.backdrop_sizes.w300}${item.backdrop_path}`}  alt={item.title} />
+      <img
+        src={`${image.secure_base_url}${image.backdrop_sizes.w300}${item.backdrop_path}`}
+        alt={item.title}
+      />
     </figure>
-    <h1>{ item.title }</h1>
+    <h1>{item.title}</h1>
   </div>
-  <p class="overview">{ processedOverview(item.overview) }</p>
+  <p class="overview">{processedOverview(item.overview)}</p>
 </article>

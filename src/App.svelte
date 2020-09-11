@@ -1,7 +1,6 @@
 <style>
   main {
     position: relative;
-    padding-top: 4rem;
     min-height: calc(100vh - 184px);
     height: auto;
   }
@@ -16,13 +15,13 @@
   import Footer from './components/Footer.svelte';
   import Loading from './components/ui/Loading.svelte';
   import Tabs from './components/ui/Tabs.svelte';
-  import PosterListCard from './components/PosterListCard.svelte';
+  import BackdropListCard from './components/BackdropListCard.svelte';
   import Details from './components/Details.svelte';
 
   const movies = new Movie();
   $: isLoading = true;
   let data = null;
-  $: detailsResponse = {};
+  $: details = {};
   $: hasDetails = false;
   let errorMessage = '';
 
@@ -47,6 +46,7 @@
    * DETAILS
    */
   const handleLoadDetails = async (event) => {
+    console.log('handleLoadDetails -> ', event);
     const {
       detail:mediaId,
     } = event;
@@ -58,8 +58,8 @@
       isLoading = true;
       hasDetails = false;
       const response = await movies.details({mediaId});
-      detailsResponse = await response.data;
-      hasDetails = !!Object.keys(detailsResponse).length;
+      details = await response.data;
+      hasDetails = !!Object.keys(details).length;
       isLoading = false;
     } catch (error) {
       isLoading = false;
@@ -109,10 +109,10 @@
 <main class="main-content">
   {#if !isLoading && !hasDetails && !errorMessage}
     <Tabs {activeItem} {pages} on:tabChange={tabChange} />
-    <PosterListCard on:handleLoadDetails={handleLoadDetails} />
+    <BackdropListCard on:handleLoadDetails={handleLoadDetails} />
   {/if}
   {#if !isLoading && hasDetails }
-    <Details {detailsResponse} on:handleBackHome={handleBackHome} />
+    <Details {details} on:handleBackHome={handleBackHome} {handleLoadDetails} />
   {/if}
   {#if isLoading}
     <Loading />

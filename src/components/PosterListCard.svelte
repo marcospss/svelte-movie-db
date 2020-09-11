@@ -1,30 +1,25 @@
 <style>
-  section {
-    padding: 14px;
+  .poster-list {
+    padding: 0 42px 42px;
+    width: 100%;
   }
-  section .grid-list {
+  .poster-list .grid-list {
     display: grid;
+    width: 100%;
     grid-template-columns: 1fr;
     row-gap: 1rem;
   }
 
   @media screen and (min-width: 600px) and (max-width: 801px) {
-    section .grid-list {
+    .poster-list .grid-list {
       grid-template-columns: repeat(2, 1fr);
       column-gap: 1rem;
     }
   }
 
-  @media screen and (min-width: 801px) and (max-width: 1024px) {
-    section .grid-list {
+  @media screen and (min-width: 801px) {
+    .poster-list .grid-list {
       grid-template-columns: repeat(3, 1fr);
-      column-gap: 1rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    section .grid-list {
-      grid-template-columns: repeat(4, 1fr);
       column-gap: 1rem;
     }
   }
@@ -32,22 +27,18 @@
 
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { fade, slide, scale } from 'svelte/transition';
-  import { flip } from 'svelte/animate';
-  
+
   import MovieStore from '../store/movieStore';
-  import CardBackdrop from './ui/CardBackdrop.svelte';
+  import CardPoster from './ui/CardPoster.svelte';
 
-  let dispatch = createEventDispatcher();
-
+  export let title;
 </script>
 
-<section>
+<section class="poster-list">
+  <h2>{title}</h2>
   <div class="grid-list">
     {#each $MovieStore as item (item.id)}
-    <div in:fade out:scale|local animate:flip={{duration: 500}} on:click={() => dispatch('handleLoadDetails', item.id)}>
-      <CardBackdrop {item} />
-    </div>
+      <CardPoster {item} />
     {/each}
   </div>
 </section>

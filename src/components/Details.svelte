@@ -34,14 +34,22 @@
     overflow: hidden;
   }
 
+  .breadcumb .btn-back {
+    background-color: transparent;
+    border: none;
+    color: var(--color-white);
+    margin: 0 0 0 26px;
+    cursor: pointer;
+  }
+
   .backdrop {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 300px;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: start;
+    align-items: start;
     overflow: hidden;
   }
   .backdrop img {
@@ -55,6 +63,7 @@
     align-items: flex-start;
     position: relative;
     width: 100%;
+    margin-bottom: 20px;
   }
 
   .header .poster {
@@ -72,23 +81,17 @@
   .header .info {
     flex-direction: column;
     width: 100%;
-    padding: 10px;
-    margin: 10px 0 10px 220px;
+    margin: 0 0 0 220px;
   }
 
   .header .info .title {
-    margin: 0;
+    margin: 20px 0 0 0;
+    text-transform: uppercase;
   }
 
   .header .info .category {
     width: 100%;
     margin: 10px 0;
-    font-weight: bold;
-  }
-
-  .header .info .runtime {
-    margin: 0;
-    font-weight: bold;
   }
 
   .overview {
@@ -100,69 +103,20 @@
 </style>
 
 <script lang="ts">
-  import { onDestroy, createEventDispatcher } from 'svelte';
+  import { onMount ,onDestroy, createEventDispatcher } from 'svelte';
   import image from '../settings/image';
 
-  export let details = {
-    adult: false,
-    backdrop_path: '/xl5oCFLVMo4d4Pgxvrf8Jmc2IlA.jpg',
-    belongs_to_collection: null,
-    budget: 200000000,
-    genres: [
-      { id: 18, name: 'Drama' },
-      { id: 28, name: 'Action' },
-      { id: 10752, name: 'War' },
-      { id: 14, name: 'Fantasy' },
-      { id: 12, name: 'Adventure' },
-    ],
-    homepage: 'https://movies.disney.com/mulan-2020',
-    id: 337401,
-    imdb_id: 'tt4566758',
-    original_language: 'en',
-    original_title: 'Mulan',
-    overview:
-      'When the Emperor of China issues a decree that one man per family must serve in the Imperial Chinese Army to defend the country from Huns, Hua Mulan, the eldest daughter of an honored warrior, steps in to take the place of her ailing father. She is spirited, determined and quick on her feet. Disguised as a man by the name of Hua Jun, she is tested every step of the way and must harness her innermost strength and embrace her true potential.',
-    popularity: 1180.813,
-    poster_path: '/aKx1ARwG55zZ0GpRvU2WrGrCG9o.jpg',
-    production_companies: [
-      {
-        id: 2,
-        logo_path: '/wdrCwmRnLFJhEoH8GSfymY85KHT.png',
-        name: 'Walt Disney Pictures',
-        origin_country: 'US',
-      },
-      {
-        id: 14714,
-        logo_path: '/oQHaOZEnPzlJACVTisV0FICrS82.png',
-        name: 'China Film Group Corporation',
-        origin_country: 'CN',
-      },
-      {
-        id: 103698,
-        logo_path: '/qS01bSMe274ecTdrgyO3BBvzfKK.png',
-        name: 'Good Fear',
-        origin_country: 'US',
-      },
-      { id: 89254, logo_path: null, name: 'Jason T. Reed Productions', origin_country: 'US' },
-      { id: 139620, logo_path: null, name: 'Bioskopin21', origin_country: '' },
-    ],
-    production_countries: [
-      { iso_3166_1: 'CN', name: 'China' },
-      { iso_3166_1: 'US', name: 'United States of America' },
-    ],
-    release_date: '2020-09-04',
-    revenue: 0,
-    runtime: 115,
-    spoken_languages: [{ iso_639_1: 'en', name: 'English' }],
-    status: 'Released',
-    tagline: '',
-    title: 'Mulan',
-    video: false,
-    vote_average: 7.8,
-    vote_count: 1042,
-  };
+  import PosterListCard from '../components/PosterListCard.svelte';
+
+  export let details;
   let dispatch = createEventDispatcher();
   const genres = details && details.genres && details.genres.map(genre => genre.name).join(' | ');
+
+  const handleLoadDetails = (id) => dispatch('handleLoadDetails', id);
+
+  onMount(() => {
+    window.scrollTo(0,0);
+  });
 
   onDestroy(() => {
     details = null;
@@ -171,8 +125,7 @@
 
 <article class="details">
   <nav aria-label="breadcrumb" class="breadcumb">
-    <span on:click={() => dispatch('handleBackHome')}>Home</span>
-    <span>{details.title}</span>
+    <button type="button" class="btn-back" on:click={() => dispatch('handleBackHome')}>Home</button>
   </nav>
   <figure class="backdrop">
     <img
@@ -188,12 +141,11 @@
       />
     </figure>
     <div class="info">
-      <h1>{details.title}</h1>
+      <h1 class="title">{details.title}</h1>
       <p class="category">{genres}</p>
-      <p class="rating">465456465</p>
-      <p class="runtime">Length: {details.runtime}</p>
     </div>
   </header>
   <p class="overview">{details.overview}</p>
-
+  <hr />
+  <PosterListCard title="Recommendations" on:handleLoadDetails={handleLoadDetails} />
 </article>

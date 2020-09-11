@@ -83,6 +83,8 @@ hr {
   box-sizing: content-box; /* 1 */
   height: 0; /* 1 */
   overflow: visible; /* 2 */
+  width: 90%;
+  border-top: 1px solid var(--color-primary);
 }
 
 /**
